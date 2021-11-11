@@ -9,8 +9,15 @@ router.get('/cities', (req, res) => {
 })
 
 router.get('/agents', (req, res) => {
-    const query = req.query;
-    console.log(query);
+    const searchedCity = req.query.city;
+    if(!searchedCity) return;
+    Agent.find({ city: `${searchedCity}` })
+    .then(agents => {
+        res.send(agents);
+    })
+    .catch(() => {
+        res.status(404).send('No data');
+    })
 })
 
 router.put('/agent/:id/edit', (req, res) => {
