@@ -8,5 +8,7 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 })
 
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE, () => {
+    console.log('DB connected');
+})
 

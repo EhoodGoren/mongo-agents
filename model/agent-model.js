@@ -7,15 +7,15 @@ const agentSchema = new mongoose.Schema(
             required: true
         },
         name: {
-            type: string,
+            type: String,
             required: true
         },
         city: {
-            type: string,
+            type: String,
             required: true
         }
     }  
 );
 
-module.exports = mongoose.model("Agent", personSchema);
+module.exports = mongoose.model("Agent", agentSchema);
 
