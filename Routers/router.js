@@ -21,7 +21,12 @@ router.get('/agents', (req, res) => {
 })
 
 router.put('/agent/:id/edit', (req, res) => {
-
+    const updateCity = req.body.city;
+    const updatedAgent = { city: updateCity };
+    const agentId = req.params.id;
+    Agent.findByIdAndUpdate(agentId, updatedAgent, { new: true })
+    .then(agent => res.send(agent))
+    .catch(error => console.log(error));
 })
 
 module.exports = router;
