@@ -13,7 +13,9 @@ router.get('/agents', (req, res) => {
     if(!searchedCity) return;
     Agent.find({ city: `${searchedCity}` })
     .then(agents => {
-        res.send(agents);
+        agents.length === 0
+        ? res.status(404).send('No agents in the city')
+        : res.send(agents);
     })
     .catch(() => {
         res.status(404).send('No data');
@@ -26,7 +28,7 @@ router.put('/agent/:id/edit', (req, res) => {
     const agentId = req.params.id;
     Agent.findByIdAndUpdate(agentId, updatedAgent, { new: true })
     .then(agent => res.send(agent))
-    .catch(error => console.log(error));
+    .catch(() => res.status(404).send('Cant find agent'));
 })
 
 module.exports = router;
